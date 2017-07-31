@@ -134,7 +134,6 @@ function setGamePoints() {
 }
 
 // Ending Game
-
   function endGame(player, computer) {
   if(player.score == 10) {
     alert("Nice, You Won!!");
@@ -145,6 +144,5 @@ function setGamePoints() {
     alert("Don't cry but You Lost. Try again");
     gameState = "ended";
     setGameElements();
-    
   }
 }
