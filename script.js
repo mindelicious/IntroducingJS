@@ -37,6 +37,10 @@ function setGameElements() {
       break;
     case 'ended':
         newGameBtn.innerText = 'Jeszcze raz';
+        playerPickElem.innerText = 'Player selection';
+        computerPickElem.innerText = 'Computer selection';
+        playerResultElem.innerText = 'Player Score';
+        computerResultElem.innerText = 'Computer Score';
     case 'notStarted':
     default:
         newGameElem.style.display = 'block';
@@ -44,6 +48,8 @@ function setGameElements() {
         resultsElem.style.display = 'none';
   }
 }
+
+setGameElements();
 
 // Start game
 var playerPointsElem = document.getElementById('js-playerPoints'),
@@ -55,6 +61,7 @@ function newGame() {
   player.name = prompt('Please enter your name', 'imię gracza');
   if (player.name) {
     player.score = computer.score = 0;
+    setGamePoints();
     gameState = 'started';
     setGameElements();
 
@@ -63,17 +70,10 @@ function newGame() {
 
 }
 
-// Player pick
-function playerPick(playerPick) {
-    console.log(playerPick);
-}
-
 // Computer pick
-Math.floor(Math.random()*3)
-
 function getComputerPick() {
     var possiblePicks = ['ROCK', 'PAPER', 'SCISSORS'];
-    return possiblePicks[Math.floor(Math.random()*3)];
+    return possiblePicks[Math.floor(Math.random() * possiblePicks.length)];
 }
 
 // Com pick vs. Plr pick
@@ -82,13 +82,6 @@ var playerPickElem = document.getElementById('js-playerPick'),
     playerResultElem = document.getElementById('js-playerResult'),
     computerResultElem = document.getElementById('js-computerResult');
 
-function playerPick(playerPick) {
-    var computerPick = getComputerPick();
-
-    playerPickElem.innerHTML = playerPick;
-    computerPickElem.innerHTML = computerPick;
-
-}
 // Granting points & Logic
 function checkRoundWinner(playerPick, computerPick) {
   playerResultElem.innerHTML = computerResultElem.innerHTML = '';
@@ -111,6 +104,8 @@ function checkRoundWinner(playerPick, computerPick) {
     } else if (winnerIs == 'computer') {
         computerResultElem.innerHTML = "Win!";
         computer.score++;
+    } else {
+        playerResultElem.innerHTML = computerResultElem.innerHTML = 'DRAW!';
     }
 
 }
@@ -134,6 +129,7 @@ function setGamePoints() {
 }
 
 // Ending Game
+
   function endGame(player, computer) {
   if(player.score == 10) {
     alert("Nice, You Won!!");
@@ -144,5 +140,6 @@ function setGamePoints() {
     alert("Don't cry but You Lost. Try again");
     gameState = "ended";
     setGameElements();
+    
   }
 }
